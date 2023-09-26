@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfqk0hmtfanro"]
+
+[ext_resource type="Texture2D" uid="uid://mha8vbqb2djl" path="res://imagese/chars.png" id="1_87ykd"]
+[ext_resource type="Script" path="res://ui/tq_icon.gd" id="2_cl45y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jwjc"]
+atlas = ExtResource("1_87ykd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mrefd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xela3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfopb"]
+bg_color = Color(1, 0, 0.0313726, 0.509804)
+
+[node name="TQIcon" type="TextureRect"]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_3jwjc")
+expand_mode = 2
+stretch_mode = 4
+flip_h = true
+script = ExtResource("2_cl45y")
+
+[node name="Deadness" type="ProgressBar" parent="."]
+modulate = Color(1, 0.952941, 1, 1)
+material = SubResource("CanvasItemMaterial_mrefd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_xela3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gfopb")
+max_value = 20.0
+step = 1.0
+fill_mode = 3
+show_percentage = false

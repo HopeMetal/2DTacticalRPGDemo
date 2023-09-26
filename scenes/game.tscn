@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4xca7lc8vsi8"]
+
+[ext_resource type="PackedScene" uid="uid://ww05yde5nb2t" path="res://scenes/terrain.tscn" id="1_huxbe"]
+[ext_resource type="Texture2D" uid="uid://xkkeet22l731" path="res://imagese/grid.png" id="2_icbvx"]
+[ext_resource type="Script" path="res://control/CController.gd" id="3_dbxfm"]
+[ext_resource type="Script" path="res://combat/Combat.gd" id="4_cujqt"]
+[ext_resource type="PackedScene" uid="uid://ddgx1hll377nx" path="res://ui/ui.tscn" id="5_pc8ih"]
+
+[node name="Game" type="Node"]
+
+[node name="Terrain" parent="." instance=ExtResource("1_huxbe")]
+
+[node name="Camera2D" type="Camera2D" parent="Terrain"]
+position = Vector2(288, 272)
+zoom = Vector2(2, 2)
+
+[node name="Select" type="Sprite2D" parent="Terrain"]
+position = Vector2(272, 208)
+texture = ExtResource("2_icbvx")
+
+[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("combat")]
+texture_filter = 1
+script = ExtResource("3_dbxfm")
+combat = NodePath("../VisualCombat")
+
+[node name="VisualCombat" type="Node" parent="." node_paths=PackedStringArray("game_ui", "controller")]
+script = ExtResource("4_cujqt")
+game_ui = NodePath("../CanvasLayer/UI")
+controller = NodePath("../Controller")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" node_paths=PackedStringArray("combat", "controller") instance=ExtResource("5_pc8ih")]
+combat = NodePath("../../VisualCombat")
+controller = NodePath("../../Controller")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="movement_changed" from="Controller" to="CanvasLayer/UI" method="set_movement"]
+[connection signal="target_selection_finished" from="Controller" to="CanvasLayer/UI" method="_target_selection_finished"]
+[connection signal="target_selection_started" from="Controller" to="CanvasLayer/UI" method="_target_selection_started"]
+[connection signal="combatant_added" from="VisualCombat" to="Controller" method="combatant_added"]
+[connection signal="combatant_added" from="VisualCombat" to="CanvasLayer/UI" method="add_combatant_status"]
+[connection signal="combatant_died" from="VisualCombat" to="Controller" method="combatant_died"]
+[connection signal="combatant_died" from="VisualCombat" to="CanvasLayer/UI" method="combatant_died"]
+[connection signal="turn_advanced" from="VisualCombat" to="Controller" method="set_controlled_combatant"]
+[connection signal="turn_advanced" from="VisualCombat" to="CanvasLayer/UI" method="show_combatant_status_main"]
+[connection signal="update_combatants" from="VisualCombat" to="CanvasLayer/UI" method="update_combatants"]
+[connection signal="update_information" from="VisualCombat" to="CanvasLayer/UI" method="update_information"]
+[connection signal="update_turn_queue" from="VisualCombat" to="CanvasLayer/UI" method="update_turn_queue"]
+[connection signal="turn_ended" from="CanvasLayer/UI" to="VisualCombat" method="advance_turn"]

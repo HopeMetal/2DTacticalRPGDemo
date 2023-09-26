@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch4v10lmvjl6v"]
+
+[ext_resource type="PackedScene" uid="uid://cuqgye8abecju" path="res://game_ui.tscn" id="1_127mc"]
+[ext_resource type="Script" path="res://combat/Combat.gd" id="1_e5jod"]
+
+[node name="Combat" type="Node" node_paths=PackedStringArray("game_ui")]
+script = ExtResource("1_e5jod")
+game_ui = NodePath("GameUI")
+
+[node name="GameUI" parent="." instance=ExtResource("1_127mc")]
+
+[connection signal="register_combat" from="." to="GameUI" method="register_combat"]
+[connection signal="turn_advanced" from="." to="GameUI" method="_on_combat_turn_advanced"]
+
+[editable path="GameUI"]

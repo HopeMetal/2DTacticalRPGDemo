@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0hcis8q3seqg"]
+
+[ext_resource type="Script" path="res://ui/status_icon.gd" id="1_a6vcq"]
+[ext_resource type="Texture2D" uid="uid://mha8vbqb2djl" path="res://imagese/chars.png" id="1_xfc1u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jwjc"]
+atlas = ExtResource("1_xfc1u")
+region = Rect2(0, 0, 32, 32)
+
+[node name="StatusIcon" type="PanelContainer"]
+size_flags_vertical = 3
+script = ExtResource("1_a6vcq")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_3jwjc")
+expand_mode = 2
+stretch_mode = 4
+flip_h = true
+
+[node name="Health" type="Label" parent="Icon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0/0"
+horizontal_alignment = 1
+vertical_alignment = 2

@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="2DTacticalRPGDemo"
+run/main_scene="res://scenes/game.tscn"
+config/features=PackedStringArray("4.1", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+SkillDatabase="*res://databases/skill_database.tscn"
+CombatantDatabase="*res://databases/combatant_database.tscn"
+
+[display]
+
+window/size/resizable=false
+mouse_cursor/custom_image="res://imagese/cursor.png"
+mouse_cursor/tooltip_position_offset=Vector2(64, 10)
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

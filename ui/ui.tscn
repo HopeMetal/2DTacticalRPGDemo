@@ -1,0 +1,228 @@
+[gd_scene load_steps=11 format=3 uid="uid://ddgx1hll377nx"]
+
+[ext_resource type="Script" path="res://ui/combat_ui.gd" id="1_cy8ae"]
+[ext_resource type="PackedScene" uid="uid://d0hcis8q3seqg" path="res://ui/status_icon.tscn" id="4_mn0g0"]
+[ext_resource type="Texture2D" uid="uid://b5bhqfskef7lb" path="res://imagese/icon/melee_attack.png" id="6_puss2"]
+[ext_resource type="Texture2D" uid="uid://bonh4ibo7lwda" path="res://imagese/icon/ranged_attack.png" id="7_i51fj"]
+[ext_resource type="Texture2D" uid="uid://wxkh5qyiy8c1" path="res://imagese/icon/basic_magic.png" id="8_do1mp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kj4jo"]
+bg_color = Color(0, 0, 0, 0.52549)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdlup"]
+bg_color = Color(0.360784, 0.360784, 0.360784, 1)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dsm8"]
+shadow_size = 10
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_do5rw"]
+bg_color = Color(0.243137, 0.243137, 0.243137, 1)
+shadow_size = 10
+shadow_offset = Vector2(0, -5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_um0nj"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+shadow_size = 10
+
+[node name="UI" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_cy8ae")
+
+[node name="TurnQueue" type="PanelContainer" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 400.0
+offset_top = 16.0
+offset_right = 804.0
+offset_bottom = 80.0
+
+[node name="Queue" type="HBoxContainer" parent="TurnQueue"]
+layout_mode = 2
+
+[node name="Status" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 336.0
+offset_right = 99.0
+offset_bottom = 592.0
+
+[node name="Actions" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 335.0
+offset_top = 519.0
+offset_right = 479.0
+offset_bottom = 631.0
+
+[node name="StatusIcon" parent="Actions" instance=ExtResource("4_mn0g0")]
+layout_mode = 2
+offset_left = -38.0
+offset_top = 10.0
+offset_right = 74.0
+offset_bottom = 122.0
+
+[node name="ActionsPanel" type="PanelContainer" parent="Actions"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 13.0
+offset_right = 448.0
+offset_bottom = 119.0
+
+[node name="ActionsGrid" type="GridContainer" parent="Actions/ActionsPanel"]
+layout_mode = 2
+columns = 6
+
+[node name="Slot1" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("6_puss2")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot2" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("7_i51fj")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot3" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon = ExtResource("8_do1mp")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot4" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot5" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot6" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot7" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot8" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot9" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot10" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot11" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Slot12" type="Button" parent="Actions/ActionsPanel/ActionsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+focus_mode = 0
+icon_alignment = 1
+expand_icon = true
+
+[node name="Movement" type="Label" parent="Actions"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 89.0
+offset_right = 120.0
+offset_bottom = 115.0
+tooltip_text = "Movement"
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.960784, 0.898039, 0.231373, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_kj4jo")
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndTurnButton" type="Button" parent="Actions"]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 78.0
+offset_right = 532.0
+offset_bottom = 109.0
+focus_mode = 0
+theme_override_colors/font_disabled_color = Color(0.364706, 0.364706, 0.364706, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_pdlup")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3dsm8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_do5rw")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_um0nj")
+text = "End Turn"
+
+[node name="Information" type="PanelContainer" parent="Actions"]
+layout_mode = 0
+offset_left = 546.0
+offset_top = 21.0
+offset_right = 794.0
+offset_bottom = 106.0
+
+[node name="Text" type="RichTextLabel" parent="Actions/Information"]
+layout_mode = 2
+bbcode_enabled = true
+scroll_following = true
+shortcut_keys_enabled = false
+
+[node name="SelectTargetMessage" type="PanelContainer" parent="Actions"]
+visible = false
+layout_mode = 0
+offset_left = 185.0
+offset_top = -38.0
+offset_right = 385.0
+offset_bottom = 2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Actions/SelectTargetMessage"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="Label" type="Label" parent="Actions/SelectTargetMessage/MarginContainer"]
+layout_mode = 2
+text = "Select Target"
+
+[connection signal="pressed" from="Actions/EndTurnButton" to="." method="_on_end_turn_button_pressed"]

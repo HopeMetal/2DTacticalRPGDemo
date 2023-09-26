@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://csoe2cma4kbg6"]
+
+[ext_resource type="Script" path="res://databases/skill_database.gd" id="1_bnr7k"]
+[ext_resource type="Script" path="res://combat/resources/SkillDefinition.gd" id="2_twktv"]
+[ext_resource type="Texture2D" uid="uid://b5bhqfskef7lb" path="res://imagese/icon/melee_attack.png" id="2_wuynl"]
+[ext_resource type="Texture2D" uid="uid://bonh4ibo7lwda" path="res://imagese/icon/ranged_attack.png" id="4_gjsae"]
+[ext_resource type="Texture2D" uid="uid://wxkh5qyiy8c1" path="res://imagese/icon/basic_magic.png" id="5_vgs37"]
+
+[sub_resource type="Resource" id="Resource_lgmlb"]
+script = ExtResource("2_twktv")
+name = "Attack (Melee)"
+min_range = 1
+max_range = 1
+min_damage = 1
+max_damage = 5
+min_prob = 25
+max_prob = 90
+icon = ExtResource("2_wuynl")
+
+[sub_resource type="Resource" id="Resource_4cuap"]
+script = ExtResource("2_twktv")
+name = "Attack (Ranged)"
+min_range = 2
+max_range = 4
+min_damage = 1
+max_damage = 5
+min_prob = 25
+max_prob = 90
+icon = ExtResource("4_gjsae")
+
+[sub_resource type="Resource" id="Resource_xxs2r"]
+script = ExtResource("2_twktv")
+name = "Basic Magic"
+min_range = 0
+max_range = 0
+min_damage = 2
+max_damage = 7
+min_prob = 100
+max_prob = 100
+icon = ExtResource("5_vgs37")
+
+[node name="SkillDatabase" type="Node"]
+script = ExtResource("1_bnr7k")
+skills = {
+"attack_melee": SubResource("Resource_lgmlb"),
+"attack_ranged": SubResource("Resource_4cuap"),
+"basic_magic": SubResource("Resource_xxs2r")
+}

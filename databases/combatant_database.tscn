@@ -1,0 +1,83 @@
+[gd_scene load_steps=17 format=3 uid="uid://sgve77vtu623"]
+
+[ext_resource type="Script" path="res://databases/combatant_database.gd" id="1_5ebs0"]
+[ext_resource type="Script" path="res://combat/resources/CombatantDefinition.gd" id="2_rggep"]
+[ext_resource type="Texture2D" uid="uid://mha8vbqb2djl" path="res://imagese/chars.png" id="3_vw1bw"]
+[ext_resource type="Texture2D" uid="uid://tho1dgha8gr1" path="res://imagese/monsters.png" id="4_72lse"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhi33"]
+atlas = ExtResource("3_vw1bw")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6sc2"]
+atlas = ExtResource("3_vw1bw")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="Resource" id="Resource_bwgmm"]
+script = ExtResource("2_rggep")
+name = "Alexandra"
+max_hp = 8
+class_t = 2
+movement = 3
+icon = SubResource("AtlasTexture_lhi33")
+map_sprite = SubResource("AtlasTexture_c6sc2")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8grfo"]
+atlas = ExtResource("3_vw1bw")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0li6"]
+atlas = ExtResource("3_vw1bw")
+region = Rect2(0, 64, 64, 32)
+
+[sub_resource type="Resource" id="Resource_w6c3b"]
+script = ExtResource("2_rggep")
+name = "Bob"
+max_hp = 10
+class_t = 1
+movement = 5
+icon = SubResource("AtlasTexture_8grfo")
+map_sprite = SubResource("AtlasTexture_i0li6")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o51yk"]
+atlas = ExtResource("4_72lse")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5856y"]
+atlas = ExtResource("4_72lse")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="Resource" id="Resource_s2oe2"]
+script = ExtResource("2_rggep")
+name = "Goblin"
+max_hp = 5
+class_t = 0
+movement = 3
+icon = SubResource("AtlasTexture_o51yk")
+map_sprite = SubResource("AtlasTexture_5856y")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwsrb"]
+atlas = ExtResource("3_vw1bw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87cae"]
+atlas = ExtResource("3_vw1bw")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="Resource" id="Resource_tkpbb"]
+script = ExtResource("2_rggep")
+name = "Steve"
+max_hp = 12
+class_t = 0
+movement = 4
+icon = SubResource("AtlasTexture_kwsrb")
+map_sprite = SubResource("AtlasTexture_87cae")
+
+[node name="CombatantDatabase" type="Node"]
+script = ExtResource("1_5ebs0")
+combatants = {
+"alexandra": SubResource("Resource_bwgmm"),
+"bob": SubResource("Resource_w6c3b"),
+"goblin": SubResource("Resource_s2oe2"),
+"steve": SubResource("Resource_tkpbb")
+}
