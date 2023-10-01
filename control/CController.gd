@@ -188,7 +188,7 @@ func find_path(tile_position: Vector2i):
 func move_player():
 	var current_position = tile_map.local_to_map(controlled_node.position)
 	var _path_size = _path.size()
-	if _path_size > 1 and _path_size - 1 <= movement:
+	if _path_size > 1 and movement > 0:
 		move_on_path(current_position)
 
 
