@@ -192,6 +192,9 @@ texture_region_size = Vector2i(32, 32)
 6:0/animation_frame_2/duration = 0.3
 6:0/0 = 0
 6:0/0/custom_data_0 = 2
+6:1/0 = 0
+6:1/0/custom_data_0 = 1
+6:1/0/custom_data_1 = [2]
 
 [sub_resource type="TileSet" id="TileSet_7duyg"]
 tile_size = Vector2i(32, 32)
@@ -202,6 +205,8 @@ terrain_set_0/terrain_1/name = "Grass"
 terrain_set_0/terrain_1/color = Color(0.176471, 0.647059, 0.133333, 1)
 custom_data_layer_0/name = "Cost"
 custom_data_layer_0/type = 2
+custom_data_layer_1/name = "Blocks"
+custom_data_layer_1/type = 28
 sources/0 = SubResource("TileSetAtlasSource_g18d7")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_srjmf"]
