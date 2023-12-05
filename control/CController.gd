@@ -54,6 +54,8 @@ func _unhandled_input(event):
 				else:
 					_attack_target_position = null
 					_blocked_target_position = local_map
+			elif mouse_position_i in _blocking_spaces[combat.get_current_combatant().movement_class]:
+				_blocked_target_position = local_map
 			else:
 				_attack_target_position = null
 				_blocked_target_position = null
