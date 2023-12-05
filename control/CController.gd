@@ -237,11 +237,19 @@ const grid_tex = preload("res://imagese/grid_marker.png")
 
 func _draw():
 	if _arrived == true and player_turn == true:
+		var path_length = movement
 		for i in range(_path.size()):
+			var tilemap = get_node("../Terrain/TileMap") as TileMap
+			
 			var point = _path[i]
+			var tile = tilemap.local_to_map(point)
+			var tile_data = tilemap.get_cell_tile_data(0, tile)
+			
 			var draw_color = Color.WHITE
-			if i <= movement:
+			if path_length > 0:
 				draw_color = Color.ROYAL_BLUE
+			if i > 0:
+				path_length -= int(tile_data.get_custom_data("Cost"))
 			draw_texture(grid_tex, point - Vector2(16, 16), draw_color)
 		if _attack_target_position != null:
 			draw_texture(grid_tex, _attack_target_position - Vector2(16, 16), Color.CRIMSON)
