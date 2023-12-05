@@ -235,24 +235,25 @@ func target_selected(target: Dictionary):
 
 const grid_tex = preload("res://imagese/grid_marker.png")
 
+func get_tile_cost_at_point(point):
+	var tilemap = get_node("../Terrain/TileMap") as TileMap
+	var tile = tilemap.local_to_map(point)
+	var tile_data = tilemap.get_cell_tile_data(0, tile)
+	if combat.get_current_combatant().movement_class == 0:
+		return int(tile_data.get_custom_data("Cost"))
+	else:
+		return 1
+
 func _draw():
 	if _arrived == true and player_turn == true:
 		var path_length = movement
 		for i in range(_path.size()):
-			var tilemap = get_node("../Terrain/TileMap") as TileMap
-			
-			var point = _path[i]
-			var tile = tilemap.local_to_map(point)
-			var tile_data = tilemap.get_cell_tile_data(0, tile)
-			
+			var point = _path[i]			
 			var draw_color = Color.WHITE
 			if path_length > 0:
 				draw_color = Color.ROYAL_BLUE
 			if i > 0:
-				if combat.get_current_combatant().movement_class == 0:
-					path_length -= int(tile_data.get_custom_data("Cost"))
-				else:
-					path_length -= 1
+				path_length -= get_tile_cost_at_point(point)
 			draw_texture(grid_tex, point - Vector2(16, 16), draw_color)
 		if _attack_target_position != null:
 			draw_texture(grid_tex, _attack_target_position - Vector2(16, 16), Color.CRIMSON)
