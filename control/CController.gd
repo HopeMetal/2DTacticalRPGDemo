@@ -249,7 +249,10 @@ func _draw():
 			if path_length > 0:
 				draw_color = Color.ROYAL_BLUE
 			if i > 0:
-				path_length -= int(tile_data.get_custom_data("Cost"))
+				if combat.get_current_combatant().movement_class == 0:
+					path_length -= int(tile_data.get_custom_data("Cost"))
+				else:
+					path_length -= 1
 			draw_texture(grid_tex, point - Vector2(16, 16), draw_color)
 		if _attack_target_position != null:
 			draw_texture(grid_tex, _attack_target_position - Vector2(16, 16), Color.CRIMSON)
