@@ -50,17 +50,17 @@ func _ready():
 #	$Grid/ItemList.grab_focus()
 	#ADD PLAYERS
 	add_combatant(create_combatant(CombatantDatabase.combatants["steve"]), 0, Vector2i(8,6))
-	add_combatant(create_combatant(CombatantDatabase.combatants["bob"]), 0, Vector2i(6,7))
+	add_combatant(create_combatant(CombatantDatabase.combatants["eye"]), 0, Vector2i(6,7))
 	add_combatant(create_combatant(CombatantDatabase.combatants["alexandra"]), 0, Vector2i(4,7))
 	
 	#ADD ENEMIES
-	add_combatant(create_combatant(CombatantDatabase.combatants["goblin"], "Goblin 1"), 1, Vector2i(10,5))
+	add_combatant(create_combatant(CombatantDatabase.combatants["eye"], "Goblin 1"), 1, Vector2i(10,5))
 	add_combatant(create_combatant(CombatantDatabase.combatants["goblin"], "Goblin 2"), 1, Vector2i(10,7))
 	add_combatant(create_combatant(CombatantDatabase.combatants["goblin"], "Goblin 3"), 1, Vector2i(10,9))
 	
 	emit_signal("update_turn_queue", combatants, turn_queue)
 	
-	controller.controlled_node = combatants[0].sprite
+	controller.set_controlled_combatant(combatants[0])
 	game_ui.set_skill_list(combatants[turn_queue[0]].skill_list)
 
 
@@ -71,6 +71,7 @@ func create_combatant(definition: CombatantDefinition, override_name = ""):
 		"hp" = definition.max_hp,
 		"class" = definition.class_t,
 		"alive" = true,
+		"movement_class" = definition.class_m,
 		"skill_list" = skills_lists[definition.class_t],
 		"icon" = definition.icon,
 		"map_sprite" = definition.map_sprite,
