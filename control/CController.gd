@@ -67,6 +67,12 @@ func get_combatant_at_position(target_position: Vector2i):
 
 var _occupied_spaces = []
 
+var _blocking_spaces = [
+	[],#Ground
+	[],#Flying
+	[]#Mounted
+]
+
 func _ready():
 	tile_map = get_node("../Terrain/TileMap")
 #	controlled_node = tile_map.get_node("Steve")
@@ -76,6 +82,12 @@ func _ready():
 	_astargrid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	_astargrid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	_astargrid.update()
+	
+	#build blocking spaces arrays
+	for tile in tile_map.get_used_cells(0):
+		var tile_blocking = tile_map.get_cell_tile_data(0, tile)
+		for block in tile_blocking.get_custom_data("Blocks"):
+			_blocking_spaces[block].append(tile)
 
 
 func combatant_added(combatant):
@@ -100,6 +112,7 @@ func set_controlled_combatant(combatant: Dictionary):
 	update_points_weight()
 
 func update_points_weight():
+	#Update occupied spaces for flying units
 	for point in _occupied_spaces:
 		if combat.get_current_combatant().movement_class == 1:
 			_astargrid.set_point_weight_scale(point, 1)
