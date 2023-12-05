@@ -118,6 +118,13 @@ func update_points_weight():
 			_astargrid.set_point_weight_scale(point, 1)
 		else:
 			_astargrid.set_point_weight_scale(point, INF)
+	#Update point weights for blocking spaces
+	for class_m in range(_blocking_spaces.size()):
+		for space in _blocking_spaces[class_m]:
+			if combat.get_current_combatant().movement_class == class_m:
+				_astargrid.set_point_weight_scale(space, INF)
+			else:
+				_astargrid.set_point_weight_scale(space, 1)
 
 func get_distance(point1: Vector2i, point2: Vector2i):
 	return absi(point1.x - point2.x) + absi(point1.y - point2.y)
