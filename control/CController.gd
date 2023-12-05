@@ -65,6 +65,7 @@ func get_combatant_at_position(target_position: Vector2i):
 			return comb
 	return null
 
+var _occupied_spaces = []
 
 func _ready():
 	tile_map = get_node("../Terrain/TileMap")
@@ -78,11 +79,15 @@ func _ready():
 
 
 func combatant_added(combatant):
-	_astargrid.set_point_solid(combatant.position, true)
+#	_astargrid.set_point_solid(combatant.position, true)
+#	_astargrid.set_point_weight_scale(combatant.position, INF)
+	_occupied_spaces.append(combatant.position)
 
 
 func combatant_died(combatant):
-	_astargrid.set_point_solid(combatant.position, false)
+#	_astargrid.set_point_solid(combatant.position, false)
+#	_astargrid.set_point_weight_scale(combatant.position, 1)
+	_occupied_spaces.erase(combatant.position)
 
 
 func set_controlled_combatant(combatant: Dictionary):
@@ -92,7 +97,14 @@ func set_controlled_combatant(combatant: Dictionary):
 		player_turn = false
 	controlled_node = combatant.sprite
 	movement = combatant.movement
+	update_points_weight()
 
+func update_points_weight():
+	for point in _occupied_spaces:
+		if combat.get_current_combatant().movement_class == 1:
+			_astargrid.set_point_weight_scale(point, 1)
+		else:
+			_astargrid.set_point_weight_scale(point, INF)
 
 func get_distance(point1: Vector2i, point2: Vector2i):
 	return absi(point1.x - point2.x) + absi(point1.y - point2.y)
@@ -114,12 +126,15 @@ func _process(delta):
 	if _arrived == false:
 		controlled_node.position += controlled_node.position.direction_to(_next_position) * delta * move_speed
 		if controlled_node.position.distance_to(_next_position) < 1:
-			_astargrid.set_point_solid(_previous_position, false)
+#			_astargrid.set_point_solid(_previous_position, false)
+			_occupied_spaces.erase(_previous_position)
 			controlled_node.position = _next_position
 			var new_position: Vector2i = tile_map.local_to_map(_next_position)
 			combat.get_current_combatant().position = new_position
 			_previous_position = new_position
-			_astargrid.set_point_solid(new_position, true)
+#			_astargrid.set_point_solid(new_position, true)
+			_occupied_spaces.append(new_position)
+			update_points_weight()
 			movement -= 1
 			if _position_id < _path.size() - 1 and movement > 0:
 				_position_id += 1
@@ -149,7 +164,7 @@ func ai_process(target_position: Vector2i):
 	var current_position = tile_map.local_to_map(controlled_node.position)
 	print(current_position)
 	for tile in tiles_to_check:
-		if !_astargrid.is_point_solid(target_position + tile):
+		if !_astargrid.get_point_weight_scale(target_position + tile) > 999999:
 			ai_move(target_position + tile)
 			break
 	return finished_move
@@ -169,7 +184,8 @@ func find_path(tile_position: Vector2i):
 #	var distance = get_distance(current_position, tile_position)
 #	if distance > movement:
 #		return
-	if _astargrid.is_point_solid(tile_position):
+#	if _astargrid.get_point_weight_scale(tile_position) > 999999:
+	if _occupied_spaces.has(tile_position):
 		var dir : Vector2i
 		if current_position.x > tile_position.x:
 			dir = Vector2i.RIGHT
