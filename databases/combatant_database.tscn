@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://sgve77vtu623"]
+[gd_scene load_steps=20 format=3 uid="uid://sgve77vtu623"]
 
 [ext_resource type="Script" path="res://databases/combatant_database.gd" id="1_5ebs0"]
 [ext_resource type="Script" path="res://combat/resources/CombatantDefinition.gd" id="2_rggep"]
@@ -18,6 +18,7 @@ script = ExtResource("2_rggep")
 name = "Alexandra"
 max_hp = 8
 class_t = 2
+class_m = 0
 movement = 3
 icon = SubResource("AtlasTexture_lhi33")
 map_sprite = SubResource("AtlasTexture_c6sc2")
@@ -35,6 +36,7 @@ script = ExtResource("2_rggep")
 name = "Bob"
 max_hp = 10
 class_t = 1
+class_m = 0
 movement = 5
 icon = SubResource("AtlasTexture_8grfo")
 map_sprite = SubResource("AtlasTexture_i0li6")
@@ -52,6 +54,7 @@ script = ExtResource("2_rggep")
 name = "Goblin"
 max_hp = 5
 class_t = 0
+class_m = 0
 movement = 3
 icon = SubResource("AtlasTexture_o51yk")
 map_sprite = SubResource("AtlasTexture_5856y")
@@ -69,15 +72,35 @@ script = ExtResource("2_rggep")
 name = "Steve"
 max_hp = 12
 class_t = 0
+class_m = 0
 movement = 4
 icon = SubResource("AtlasTexture_kwsrb")
 map_sprite = SubResource("AtlasTexture_87cae")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kjpw"]
+atlas = ExtResource("4_72lse")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pife"]
+atlas = ExtResource("4_72lse")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="Resource" id="Resource_3h68d"]
+script = ExtResource("2_rggep")
+name = "Eye"
+max_hp = 4
+class_t = 0
+class_m = 1
+movement = 5
+icon = SubResource("AtlasTexture_6kjpw")
+map_sprite = SubResource("AtlasTexture_2pife")
 
 [node name="CombatantDatabase" type="Node"]
 script = ExtResource("1_5ebs0")
 combatants = {
 "alexandra": SubResource("Resource_bwgmm"),
 "bob": SubResource("Resource_w6c3b"),
+"eye": SubResource("Resource_3h68d"),
 "goblin": SubResource("Resource_s2oe2"),
 "steve": SubResource("Resource_tkpbb")
 }
