@@ -128,6 +128,7 @@ func _process(delta):
 		if controlled_node.position.distance_to(_next_position) < 1:
 #			_astargrid.set_point_solid(_previous_position, false)
 			_occupied_spaces.erase(_previous_position)
+			var tile_cost = get_tile_cost(_previous_position)
 			controlled_node.position = _next_position
 			var new_position: Vector2i = tile_map.local_to_map(_next_position)
 			combat.get_current_combatant().position = new_position
@@ -135,8 +136,9 @@ func _process(delta):
 #			_astargrid.set_point_solid(new_position, true)
 			_occupied_spaces.append(new_position)
 			update_points_weight()
-			movement -= 1
-			if _position_id < _path.size() - 1 and movement > 0:
+			var next_tile_cost = get_tile_cost(new_position)
+			movement -= tile_cost
+			if _position_id < _path.size() - 1 and movement > 0 and next_tile_cost <= movement:
 				_position_id += 1
 				_next_position = _path[_position_id]
 			else:
@@ -235,10 +237,16 @@ func target_selected(target: Dictionary):
 
 const grid_tex = preload("res://imagese/grid_marker.png")
 
+func get_tile_cost(tile):
+	var tile_data = tile_map.get_cell_tile_data(0, tile)
+	if combat.get_current_combatant().movement_class == 0:
+		return int(tile_data.get_custom_data("Cost"))
+	else:
+		return 1
+
 func get_tile_cost_at_point(point):
-	var tilemap = get_node("../Terrain/TileMap") as TileMap
-	var tile = tilemap.local_to_map(point)
-	var tile_data = tilemap.get_cell_tile_data(0, tile)
+	var tile = tile_map.local_to_map(point)
+	var tile_data = tile_map.get_cell_tile_data(0, tile)
 	if combat.get_current_combatant().movement_class == 0:
 		return int(tile_data.get_custom_data("Cost"))
 	else:
@@ -248,7 +256,7 @@ func _draw():
 	if _arrived == true and player_turn == true:
 		var path_length = movement
 		for i in range(_path.size()):
-			var point = _path[i]			
+			var point = _path[i]
 			var draw_color = Color.WHITE
 			if path_length > 0:
 				draw_color = Color.ROYAL_BLUE
