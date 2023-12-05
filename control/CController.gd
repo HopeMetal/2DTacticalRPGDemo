@@ -206,8 +206,8 @@ func find_path(tile_position: Vector2i):
 #	var distance = get_distance(current_position, tile_position)
 #	if distance > movement:
 #		return
-#	if _astargrid.get_point_weight_scale(tile_position) > 999999:
-	if _occupied_spaces.has(tile_position):
+	if _astargrid.get_point_weight_scale(tile_position) > 999999:
+#	if _occupied_spaces.has(tile_position):
 		var dir : Vector2i
 		if current_position.x > tile_position.x:
 			dir = Vector2i.RIGHT
