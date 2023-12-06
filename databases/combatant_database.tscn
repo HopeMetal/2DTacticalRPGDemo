@@ -20,7 +20,7 @@ max_hp = 8
 class_t = 2
 class_m = 0
 movement = 3
-initiative = 2
+initiative = 1
 icon = SubResource("AtlasTexture_lhi33")
 map_sprite = SubResource("AtlasTexture_c6sc2")
 
