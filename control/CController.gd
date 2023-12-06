@@ -150,6 +150,7 @@ func _process(delta):
 		if controlled_node.position.distance_to(_next_position) < 1:
 #			_astargrid.set_point_solid(_previous_position, false)
 			_occupied_spaces.erase(_previous_position)
+			_astargrid.set_point_weight_scale(_previous_position, 1)
 			var tile_cost = get_tile_cost(_previous_position)
 			controlled_node.position = _next_position
 			var new_position: Vector2i = tile_map.local_to_map(_next_position)
