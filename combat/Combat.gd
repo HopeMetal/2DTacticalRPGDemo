@@ -75,7 +75,8 @@ func create_combatant(definition: CombatantDefinition, override_name = ""):
 		"skill_list" = skills_lists[definition.class_t],
 		"icon" = definition.icon,
 		"map_sprite" = definition.map_sprite,
-		"movement" = definition.movement
+		"movement" = definition.movement,
+		"initiative" = definition.initiative
 		}
 	if override_name != "":
 		comb.name = override_name
@@ -133,7 +134,6 @@ func add_combatant(combatant: Dictionary, side: int, position: Vector2i):
 
 func get_current_combatant():
 	return combatants[current_combatant]
-
 
 func get_distance(attacker: Dictionary, target: Dictionary):
 	var point1 = attacker.position

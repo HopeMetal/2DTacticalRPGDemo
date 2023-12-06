@@ -20,6 +20,7 @@ max_hp = 8
 class_t = 2
 class_m = 0
 movement = 3
+initiative = 2
 icon = SubResource("AtlasTexture_lhi33")
 map_sprite = SubResource("AtlasTexture_c6sc2")
 
@@ -38,8 +39,28 @@ max_hp = 10
 class_t = 1
 class_m = 0
 movement = 5
+initiative = 4
 icon = SubResource("AtlasTexture_8grfo")
 map_sprite = SubResource("AtlasTexture_i0li6")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kjpw"]
+atlas = ExtResource("4_72lse")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pife"]
+atlas = ExtResource("4_72lse")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="Resource" id="Resource_3h68d"]
+script = ExtResource("2_rggep")
+name = "Eye"
+max_hp = 4
+class_t = 0
+class_m = 1
+movement = 5
+initiative = 4
+icon = SubResource("AtlasTexture_6kjpw")
+map_sprite = SubResource("AtlasTexture_2pife")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o51yk"]
 atlas = ExtResource("4_72lse")
@@ -56,6 +77,7 @@ max_hp = 5
 class_t = 0
 class_m = 0
 movement = 3
+initiative = 3
 icon = SubResource("AtlasTexture_o51yk")
 map_sprite = SubResource("AtlasTexture_5856y")
 
@@ -74,26 +96,9 @@ max_hp = 12
 class_t = 0
 class_m = 2
 movement = 4
+initiative = 5
 icon = SubResource("AtlasTexture_kwsrb")
 map_sprite = SubResource("AtlasTexture_87cae")
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6kjpw"]
-atlas = ExtResource("4_72lse")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2pife"]
-atlas = ExtResource("4_72lse")
-region = Rect2(64, 0, 64, 32)
-
-[sub_resource type="Resource" id="Resource_3h68d"]
-script = ExtResource("2_rggep")
-name = "Eye"
-max_hp = 4
-class_t = 0
-class_m = 1
-movement = 5
-icon = SubResource("AtlasTexture_6kjpw")
-map_sprite = SubResource("AtlasTexture_2pife")
 
 [node name="CombatantDatabase" type="Node"]
 script = ExtResource("1_5ebs0")
