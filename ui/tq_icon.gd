@@ -19,6 +19,6 @@ func update_deadness():
 func set_side(side: int):
 	match side:
 		0:
-			$Border.modulate = Color.ROYAL_BLUE
+			$Border.modulate = Color.DODGER_BLUE
 		1:
 			$Border.modulate = Color.CRIMSON
