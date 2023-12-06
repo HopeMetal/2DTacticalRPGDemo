@@ -15,3 +15,10 @@ func set_hp(hp: int):
 func update_deadness():
 	var deadness_value = max_hp - hp
 	$Deadness.value = deadness_value
+
+func set_side(side: int):
+	match side:
+		0:
+			$Border.modulate = Color.ROYAL_BLUE
+		1:
+			$Border.modulate = Color.CRIMSON

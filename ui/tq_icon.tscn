@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfqk0hmtfanro"]
+[gd_scene load_steps=8 format=3 uid="uid://dfqk0hmtfanro"]
 
 [ext_resource type="Texture2D" uid="uid://mha8vbqb2djl" path="res://imagese/chars.png" id="1_87ykd"]
 [ext_resource type="Script" path="res://ui/tq_icon.gd" id="2_cl45y"]
+[ext_resource type="Texture2D" uid="uid://xkkeet22l731" path="res://imagese/grid.png" id="3_ibpog"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3jwjc"]
 atlas = ExtResource("1_87ykd")
@@ -39,3 +40,14 @@ max_value = 20.0
 step = 1.0
 fill_mode = 3
 show_percentage = false
+
+[node name="Border" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ibpog")
+expand_mode = 2
+stretch_mode = 4
