@@ -72,7 +72,7 @@ func create_combatant(definition: CombatantDefinition, override_name = ""):
 		"class" = definition.class_t,
 		"alive" = true,
 		"movement_class" = definition.class_m,
-		"skill_list" = skills_lists[definition.class_t],
+		"skill_list" = skills_lists[definition.class_t].duplicate(),
 		"icon" = definition.icon,
 		"map_sprite" = definition.map_sprite,
 		"movement" = definition.movement,
@@ -80,6 +80,8 @@ func create_combatant(definition: CombatantDefinition, override_name = ""):
 		}
 	if override_name != "":
 		comb.name = override_name
+	if definition.skills.size() > 0:
+		comb["skill_list"].append_array(definition.skills)
 	return comb
 
 func sort_turn_queue(a, b):
