@@ -15,6 +15,7 @@ func add_turn_queue_icon(combatant: Dictionary):
 	new_icon.set_hp(combatant.hp)
 	new_icon.texture = combatant.icon
 	new_icon.name = combatant.name
+	new_icon.set_side(combatant.side)
 
 
 func update_turn_queue(combatants: Array, turn_queue: Array):
@@ -98,6 +99,8 @@ func update_combatants(combatants: Array):
 		var turn_queue_icon = $TurnQueue/Queue.get_node(comb.name)
 		if turn_queue_icon != null:
 			turn_queue_icon.set_hp(comb.hp)
+			turn_queue_icon.set_side(comb.side)
+			turn_queue_icon.set_turn_taken(comb.turn_taken)
 
 
 func set_movement(movement):

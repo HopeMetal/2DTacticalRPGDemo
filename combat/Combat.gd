@@ -32,7 +32,7 @@ var groups = [
 
 var current_combatant = 0
 var turn = 0
-var turn_queue = [0, 1, 3, 4, 5, 2]
+var turn_queue = []
 
 @export var game_ui : Control
 @export var controller : CController
@@ -47,20 +47,20 @@ var skills_lists = [
 func _ready():
 	emit_signal("register_combat", self)
 	randomize()
-#	$Grid/ItemList.grab_focus()
+
 	#ADD PLAYERS
 	add_combatant(create_combatant(CombatantDatabase.combatants["steve"]), 0, Vector2i(8,6))
-	add_combatant(create_combatant(CombatantDatabase.combatants["bob"]), 0, Vector2i(6,7))
+	add_combatant(create_combatant(CombatantDatabase.combatants["eye"]), 0, Vector2i(6,7))
 	add_combatant(create_combatant(CombatantDatabase.combatants["alexandra"]), 0, Vector2i(4,7))
 	
 	#ADD ENEMIES
-	add_combatant(create_combatant(CombatantDatabase.combatants["goblin"], "Goblin 1"), 1, Vector2i(10,5))
+	add_combatant(create_combatant(CombatantDatabase.combatants["eye"], "Goblin 1"), 1, Vector2i(10,5))
 	add_combatant(create_combatant(CombatantDatabase.combatants["goblin"], "Goblin 2"), 1, Vector2i(10,7))
 	add_combatant(create_combatant(CombatantDatabase.combatants["goblin"], "Goblin 3"), 1, Vector2i(10,9))
 	
 	emit_signal("update_turn_queue", combatants, turn_queue)
 	
-	controller.controlled_node = combatants[0].sprite
+	controller.set_controlled_combatant(combatants[turn_queue[0]])
 	game_ui.set_skill_list(combatants[turn_queue[0]].skill_list)
 
 
@@ -71,46 +71,25 @@ func create_combatant(definition: CombatantDefinition, override_name = ""):
 		"hp" = definition.max_hp,
 		"class" = definition.class_t,
 		"alive" = true,
-		"skill_list" = skills_lists[definition.class_t],
+		"movement_class" = definition.class_m,
+		"skill_list" = skills_lists[definition.class_t].duplicate(),
 		"icon" = definition.icon,
 		"map_sprite" = definition.map_sprite,
-		"movement" = definition.movement
+		"movement" = definition.movement,
+		"initiative" = definition.initiative,
+		"turn_taken" = false
 		}
 	if override_name != "":
 		comb.name = override_name
+	if definition.skills.size() > 0:
+		comb["skill_list"].append_array(definition.skills)
 	return comb
 
-
-#func add_combatant(definition: CombatantDefinition, side: int, position: Vector2i, override_name = ""):
-#	var comb = {
-#		"name" = definition.name,
-#		"max_hp" = definition.max_hp,
-#		"hp" = definition.max_hp,
-#		"position" = position,
-#		"side" = side,
-#		"class" = definition.class_t,
-#		"alive" = true,
-#		"texture" = definition.texture,
-#		"sprite" = null,
-#		"skill_list" = skills_lists[definition.class_t]
-#		}
-#	if override_name != "":
-#		comb.name = override_name
-#	combatants.append(comb)
-#	groups[side].append(combatants.size() - 1)
-#
-#	var new_combatant_sprite = Sprite2D.new()
-#	new_combatant_sprite.texture = comb.texture
-#	$"../Terrain/TileMap".add_child(new_combatant_sprite)
-#	new_combatant_sprite.position = Vector2(position * 32.0) + Vector2(16, 16)
-#	new_combatant_sprite.z_index = 1
-#	if side == 0:
-#		new_combatant_sprite.flip_h = true
-#	comb.sprite = new_combatant_sprite
-#	emit_signal("combatant_added", comb)
-#	game_ui.emit_signal("combatant_added", comb, side)
-#	game_ui.emit_signal("update_combatants", combatants, groups)
-
+func sort_turn_queue(a, b):
+	if combatants[b].initiative < combatants[a].initiative:
+		return true
+	else:
+		return false
 
 func add_combatant(combatant: Dictionary, side: int, position: Vector2i):
 	combatant["position"] = position
@@ -126,13 +105,18 @@ func add_combatant(combatant: Dictionary, side: int, position: Vector2i):
 	new_combatant_sprite.hframes = 2
 	if side == 0:
 		new_combatant_sprite.flip_h = true
+	else:
+		combatant["initiative"] -= 1
 	combatant["sprite"] = new_combatant_sprite
+	
+	turn_queue.append(combatants.size() - 1)
+	turn_queue.sort_custom(sort_turn_queue)
+	
 	emit_signal("combatant_added", combatant)
 
 
 func get_current_combatant():
 	return combatants[current_combatant]
-
 
 func get_distance(attacker: Dictionary, target: Dictionary):
 	var point1 = attacker.position
@@ -183,16 +167,20 @@ func basic_magic(attacker: Dictionary, target: Dictionary):
 func set_next_combatant():
 	turn += 1
 	if turn >= turn_queue.size():
+		for comb in combatants:
+			comb.turn_taken = false
 		turn = 0
 	current_combatant = turn_queue[turn]
 
 
 func advance_turn():
+	combatants[current_combatant].turn_taken = true
 	set_next_combatant()
 	while !combatants[current_combatant].alive:
 		set_next_combatant()
 	var comb = combatants[current_combatant]
 	emit_signal("turn_advanced", comb)
+	emit_signal("update_combatants", combatants)
 	if comb.side == 1:
 		await get_tree().create_timer(0.6).timeout
 		ai_process(comb)
@@ -219,8 +207,6 @@ func do_damage(attacker: Dictionary, target: Dictionary, skill: SkillDefinition)
 func combatant_die(combatant: Dictionary):
 	var	comb_id = combatants.find(combatant)
 	if comb_id != -1:
-#			game_ui.emit_signal("update_combatants", combatants, groups)
-#			game_ui.emit_signal("combatant_removed", target, groups, target.side)
 		combatant.alive = false
 		groups[combatant.side].erase(comb_id)
 		update_information.emit("[color=red]{0}[/color] died.\n".format([
@@ -259,22 +245,6 @@ func sort_weight_array(a, b):
 		return false
 
 
-#func ai_process(comb : Dictionary):
-#	var skill = SkillDatabase.skills["attack_melee"]
-#	var weight_array = []
-#	if comb.class == UnitClass.Melee:
-#		for target_comb_index in groups[Group.PLAYERS]:
-#			var target_comb = combatants[target_comb_index]
-#			var prob = calc_skill_prob(skill, get_distance(comb, target_comb))
-#			#append a weight, index 0 = weight, index 1 = target
-#			weight_array.append([prob / 100.0, target_comb])
-#		weight_array.sort_custom(sort_weight_array)
-#		var potential_targets_count = weight_array.size()
-#		if potential_targets_count > 0:
-#			do_damage(comb, ai_pick_target(weight_array), skill)
-#	advance_turn()
-
-
 func ai_process(comb : Dictionary):
 	var nearest_target: Dictionary
 	if comb.class == UnitClass.Melee:
@@ -291,7 +261,6 @@ func ai_process(comb : Dictionary):
 			return
 	await controller.ai_process(nearest_target.position)
 	attack(comb, nearest_target, "attack_melee")
-#	advance_turn()
 
 
 func ai_pick_target(weights):

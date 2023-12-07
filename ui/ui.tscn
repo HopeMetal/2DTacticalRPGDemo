@@ -1,10 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://ddgx1hll377nx"]
+[gd_scene load_steps=13 format=3 uid="uid://ddgx1hll377nx"]
 
 [ext_resource type="Script" path="res://ui/combat_ui.gd" id="1_cy8ae"]
+[ext_resource type="Shader" path="res://ui/GrayscaleIcon.gdshader" id="3_pilcd"]
 [ext_resource type="PackedScene" uid="uid://d0hcis8q3seqg" path="res://ui/status_icon.tscn" id="4_mn0g0"]
 [ext_resource type="Texture2D" uid="uid://b5bhqfskef7lb" path="res://imagese/icon/melee_attack.png" id="6_puss2"]
 [ext_resource type="Texture2D" uid="uid://bonh4ibo7lwda" path="res://imagese/icon/ranged_attack.png" id="7_i51fj"]
 [ext_resource type="Texture2D" uid="uid://wxkh5qyiy8c1" path="res://imagese/icon/basic_magic.png" id="8_do1mp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qt58"]
+shader = ExtResource("3_pilcd")
+shader_parameter/color_factor = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kj4jo"]
 bg_color = Color(0, 0, 0, 0.52549)
@@ -68,6 +73,9 @@ offset_left = -38.0
 offset_top = 10.0
 offset_right = 74.0
 offset_bottom = 122.0
+
+[node name="Icon" parent="Actions/StatusIcon" index="0"]
+material = SubResource("ShaderMaterial_1qt58")
 
 [node name="ActionsPanel" type="PanelContainer" parent="Actions"]
 layout_mode = 0
@@ -226,3 +234,5 @@ layout_mode = 2
 text = "Select Target"
 
 [connection signal="pressed" from="Actions/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+
+[editable path="Actions/StatusIcon"]
