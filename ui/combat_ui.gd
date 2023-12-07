@@ -100,6 +100,7 @@ func update_combatants(combatants: Array):
 		if turn_queue_icon != null:
 			turn_queue_icon.set_hp(comb.hp)
 			turn_queue_icon.set_side(comb.side)
+			turn_queue_icon.set_turn_taken(comb.turn_taken)
 
 
 func set_movement(movement):
