@@ -16,9 +16,9 @@ region = Rect2(0, 32, 64, 32)
 [sub_resource type="Resource" id="Resource_bwgmm"]
 script = ExtResource("2_rggep")
 name = "Alexandra"
-max_hp = 8
 class_t = 2
 class_m = 0
+max_hp = 1
 movement = 3
 initiative = 1
 icon = SubResource("AtlasTexture_lhi33")
@@ -35,9 +35,9 @@ region = Rect2(0, 64, 64, 32)
 [sub_resource type="Resource" id="Resource_w6c3b"]
 script = ExtResource("2_rggep")
 name = "Bob"
-max_hp = 10
 class_t = 1
 class_m = 0
+max_hp = 1
 movement = 5
 initiative = 4
 icon = SubResource("AtlasTexture_8grfo")
@@ -54,9 +54,9 @@ region = Rect2(64, 0, 64, 32)
 [sub_resource type="Resource" id="Resource_3h68d"]
 script = ExtResource("2_rggep")
 name = "Eye"
-max_hp = 4
 class_t = 0
 class_m = 1
+max_hp = 1
 movement = 5
 initiative = 4
 icon = SubResource("AtlasTexture_6kjpw")
@@ -73,9 +73,9 @@ region = Rect2(0, 0, 64, 32)
 [sub_resource type="Resource" id="Resource_s2oe2"]
 script = ExtResource("2_rggep")
 name = "Goblin"
-max_hp = 5
 class_t = 0
 class_m = 0
+max_hp = 1
 movement = 3
 initiative = 3
 icon = SubResource("AtlasTexture_o51yk")
@@ -92,9 +92,9 @@ region = Rect2(0, 0, 64, 32)
 [sub_resource type="Resource" id="Resource_tkpbb"]
 script = ExtResource("2_rggep")
 name = "Steve"
-max_hp = 12
 class_t = 0
 class_m = 2
+max_hp = 1
 movement = 4
 initiative = 5
 icon = SubResource("AtlasTexture_kwsrb")
