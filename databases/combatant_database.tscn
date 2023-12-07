@@ -63,7 +63,7 @@ movement = 5
 initiative = 4
 icon = SubResource("AtlasTexture_6kjpw")
 map_sprite = SubResource("AtlasTexture_2pife")
-skills = Array[String]([])
+skills = Array[String](["basic_magic"])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o51yk"]
 atlas = ExtResource("4_72lse")
