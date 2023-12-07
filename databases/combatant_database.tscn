@@ -23,6 +23,7 @@ movement = 3
 initiative = 1
 icon = SubResource("AtlasTexture_lhi33")
 map_sprite = SubResource("AtlasTexture_c6sc2")
+skills = Array[String]([])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8grfo"]
 atlas = ExtResource("3_vw1bw")
@@ -42,6 +43,7 @@ movement = 5
 initiative = 4
 icon = SubResource("AtlasTexture_8grfo")
 map_sprite = SubResource("AtlasTexture_i0li6")
+skills = Array[String]([])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6kjpw"]
 atlas = ExtResource("4_72lse")
@@ -61,6 +63,7 @@ movement = 5
 initiative = 4
 icon = SubResource("AtlasTexture_6kjpw")
 map_sprite = SubResource("AtlasTexture_2pife")
+skills = Array[String]([])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o51yk"]
 atlas = ExtResource("4_72lse")
@@ -80,6 +83,7 @@ movement = 3
 initiative = 3
 icon = SubResource("AtlasTexture_o51yk")
 map_sprite = SubResource("AtlasTexture_5856y")
+skills = Array[String]([])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kwsrb"]
 atlas = ExtResource("3_vw1bw")
@@ -99,6 +103,7 @@ movement = 4
 initiative = 5
 icon = SubResource("AtlasTexture_kwsrb")
 map_sprite = SubResource("AtlasTexture_87cae")
+skills = Array[String]([])
 
 [node name="CombatantDatabase" type="Node"]
 script = ExtResource("1_5ebs0")

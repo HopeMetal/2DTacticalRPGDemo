@@ -13,3 +13,5 @@ class_name CombatantDefinition
 @export_group("Visual")
 @export var icon: Texture2D
 @export var map_sprite: Texture2D
+@export_group("Skills")
+@export var skills: Array[String]
