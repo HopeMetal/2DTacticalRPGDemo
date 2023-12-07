@@ -76,7 +76,8 @@ func create_combatant(definition: CombatantDefinition, override_name = ""):
 		"icon" = definition.icon,
 		"map_sprite" = definition.map_sprite,
 		"movement" = definition.movement,
-		"initiative" = definition.initiative
+		"initiative" = definition.initiative,
+		"turn_taken" = false
 		}
 	if override_name != "":
 		comb.name = override_name
@@ -166,16 +167,20 @@ func basic_magic(attacker: Dictionary, target: Dictionary):
 func set_next_combatant():
 	turn += 1
 	if turn >= turn_queue.size():
+		for comb in combatants:
+			comb.turn_taken = false
 		turn = 0
 	current_combatant = turn_queue[turn]
 
 
 func advance_turn():
+	combatants[current_combatant].turn_taken = true
 	set_next_combatant()
 	while !combatants[current_combatant].alive:
 		set_next_combatant()
 	var comb = combatants[current_combatant]
 	emit_signal("turn_advanced", comb)
+	emit_signal("update_combatants", combatants)
 	if comb.side == 1:
 		await get_tree().create_timer(0.6).timeout
 		ai_process(comb)
