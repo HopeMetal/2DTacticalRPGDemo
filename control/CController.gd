@@ -100,7 +100,7 @@ func combatant_added(combatant):
 
 func combatant_died(combatant):
 #	_astargrid.set_point_solid(combatant.position, false)
-#	_astargrid.set_point_weight_scale(combatant.position, 1)
+	_astargrid.set_point_weight_scale(combatant.position, 1)
 	_occupied_spaces.erase(combatant.position)
 
 
