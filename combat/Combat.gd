@@ -10,7 +10,27 @@ signal update_information(text: String)
 signal update_combatants(combatants: Array)
 signal combat_finished()
 
+@export var game_ui : Control
+@export var controller : CController
+
+@onready var camera = $"../Terrain/Camera2D2"
+
 var combatants = []
+
+var groups = [
+	[], #players
+	[]  #enemies
+]
+
+var current_combatant = 0
+var turn = 0
+var turn_queue = []
+
+var skills_lists = [
+	["attack_melee"], #Melee
+	["attack_melee", "attack_ranged"], #Ranged
+	["attack_melee", "basic_magic"] #Magic
+]
 
 enum Group
 {
@@ -24,25 +44,6 @@ enum UnitClass
 	Ranged,
 	Magic
 }
-
-var groups = [
-	[], #players
-	[]  #enemies
-]
-
-var current_combatant = 0
-var turn = 0
-var turn_queue = []
-
-@export var game_ui : Control
-@export var controller : CController
-
-var skills_lists = [
-	["attack_melee"], #Melee
-	["attack_melee", "attack_ranged"], #Ranged
-	["attack_melee", "basic_magic"] #Magic
-]
-
 
 func _ready():
 	emit_signal("register_combat", self)
@@ -58,11 +59,11 @@ func _ready():
 	add_combatant(create_combatant(CombatantDatabase.combatants["goblin"], "Goblin 2"), 1, Vector2i(10,7))
 	add_combatant(create_combatant(CombatantDatabase.combatants["goblin"], "Goblin 3"), 1, Vector2i(10,9))
 	
-	emit_signal("update_turn_queue", combatants, turn_queue)
+	emit_signal("update_turn_queue", combatants, turn_queue) # connected to UI
 	
 	controller.set_controlled_combatant(combatants[turn_queue[0]])
 	game_ui.set_skill_list(combatants[turn_queue[0]].skill_list)
-
+	camera.position = Vector2(combatants[current_combatant].position * 32.0) + Vector2(16, 16)
 
 func create_combatant(definition: CombatantDefinition, override_name = ""):
 	var comb = {
@@ -171,6 +172,8 @@ func set_next_combatant():
 			comb.turn_taken = false
 		turn = 0
 	current_combatant = turn_queue[turn]
+	# Center camera to new combatant
+	camera.position = Vector2(combatants[current_combatant].position * 32.0) + Vector2(16, 16)
 
 
 func advance_turn():

@@ -1,5 +1,7 @@
 extends Control
 
+# UI element for managing the turn queue and displaying combatant status
+
 signal turn_ended()
 
 @export var combat: Combat
@@ -7,7 +9,7 @@ signal turn_ended()
 
 const TQIcon = preload("res://ui/tq_icon.tscn")
 const StatusIcon = preload("res://ui/status_icon.tscn")
-	
+
 func add_turn_queue_icon(combatant: Dictionary):
 	var new_icon = TQIcon.instantiate()
 	$TurnQueue/Queue.add_child(new_icon)
@@ -17,13 +19,13 @@ func add_turn_queue_icon(combatant: Dictionary):
 	new_icon.name = combatant.name
 	new_icon.set_side(combatant.side)
 
-
+# Add a turn queue icon for the combatant
 func update_turn_queue(combatants: Array, turn_queue: Array):
 	for c in turn_queue:
 		var comb = combatants[c]
 		add_turn_queue_icon(comb)
 
-
+# Remove the turn queue icon for a defeated combatant
 func combatant_died(combatant):
 	var turn_queue_icon = $TurnQueue/Queue.find_child(combatant.name, false, false)
 #	if combatant.side == 0:
@@ -102,14 +104,14 @@ func update_combatants(combatants: Array):
 			turn_queue_icon.set_side(comb.side)
 			turn_queue_icon.set_turn_taken(comb.turn_taken)
 
-
+# Set the movement text
 func set_movement(movement):
 	$Actions/Movement.text = str(movement)
 
-
+# Hide the target selection message
 func _target_selection_finished():
 	$Actions/SelectTargetMessage.visible = false
 
-
+# Show the target selection message
 func _target_selection_started():
 	$Actions/SelectTargetMessage.visible = true
