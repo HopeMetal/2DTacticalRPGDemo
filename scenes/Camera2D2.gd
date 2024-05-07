@@ -12,9 +12,6 @@ var ws_speed = Vector2(0,wasd_speed)
 var zoom_min = Vector2(0.2,0.2)
 var zoom_max = Vector2(1.8,1.8)
 
-func _ready():
-	position = Vector2(800,100)
-
 func _unhandled_input(event):
 	## Move camera
 	# Move by mouse
@@ -47,3 +44,8 @@ func _unhandled_input(event):
 		zoom /= zoom_speed
 		if zoom < zoom_min:
 			zoom = zoom_min
+
+
+func _on_visual_combat_camera_position(pos):
+	print(pos)
+	position = pos
