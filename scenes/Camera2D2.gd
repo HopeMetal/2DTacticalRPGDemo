@@ -46,6 +46,7 @@ func _unhandled_input(event):
 			zoom = zoom_min
 
 
-func _on_visual_combat_camera_position(pos):
+func _on_update_camera_position(combatant : Dictionary):
+	var pos = combatant.position * 32.0 + Vector2(16, 16)
 	print(pos)
 	position = pos

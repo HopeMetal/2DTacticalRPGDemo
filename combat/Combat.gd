@@ -8,7 +8,7 @@ signal combatant_died(combatant: Dictionary)
 signal update_turn_queue(combatants: Array, turn_queue: Array)
 signal update_information(text: String)
 signal update_combatants(combatants: Array)
-signal camera_position(pos: Vector2)
+signal combat_started(combatant: Dictionary)
 signal combat_finished()
 
 @export var game_ui : Control
@@ -62,7 +62,8 @@ func _ready():
 	
 	controller.set_controlled_combatant(combatants[turn_queue[0]])
 	game_ui.set_skill_list(combatants[turn_queue[0]].skill_list)
-	camera_position.emit(Vector2(combatants[current_combatant].position * 32.0) + Vector2(16, 16))
+	combat_started.emit(combatants[current_combatant])
+
 
 func create_combatant(definition: CombatantDefinition, override_name = ""):
 	var comb = {
@@ -171,8 +172,6 @@ func set_next_combatant():
 			comb.turn_taken = false
 		turn = 0
 	current_combatant = turn_queue[turn]
-	# Center camera to new combatant
-	camera_position.emit(Vector2(combatants[current_combatant].position * 32.0) + Vector2(16, 16))
 
 
 func advance_turn():
