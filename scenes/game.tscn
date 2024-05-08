@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4xca7lc8vsi8"]
 
 [ext_resource type="PackedScene" uid="uid://ww05yde5nb2t" path="res://scenes/terrain.tscn" id="1_huxbe"]
-[ext_resource type="Texture2D" uid="uid://xkkeet22l731" path="res://imagese/grid.png" id="2_icbvx"]
 [ext_resource type="Script" path="res://control/CController.gd" id="3_dbxfm"]
+[ext_resource type="Script" path="res://scenes/Camera2D2.gd" id="3_uma2b"]
 [ext_resource type="Script" path="res://combat/Combat.gd" id="4_cujqt"]
 [ext_resource type="PackedScene" uid="uid://ddgx1hll377nx" path="res://ui/ui.tscn" id="5_pc8ih"]
 
@@ -10,13 +10,8 @@
 
 [node name="Terrain" parent="." instance=ExtResource("1_huxbe")]
 
-[node name="Camera2D" type="Camera2D" parent="Terrain"]
-position = Vector2(288, 272)
-zoom = Vector2(2, 2)
-
-[node name="Select" type="Sprite2D" parent="Terrain"]
-position = Vector2(272, 208)
-texture = ExtResource("2_icbvx")
+[node name="Camera2D2" type="Camera2D" parent="Terrain"]
+script = ExtResource("3_uma2b")
 
 [node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("combat")]
 texture_filter = 1
@@ -38,6 +33,7 @@ metadata/_edit_use_anchors_ = true
 [connection signal="movement_changed" from="Controller" to="CanvasLayer/UI" method="set_movement"]
 [connection signal="target_selection_finished" from="Controller" to="CanvasLayer/UI" method="_target_selection_finished"]
 [connection signal="target_selection_started" from="Controller" to="CanvasLayer/UI" method="_target_selection_started"]
+[connection signal="camera_position" from="VisualCombat" to="Terrain/Camera2D2" method="_on_visual_combat_camera_position"]
 [connection signal="combatant_added" from="VisualCombat" to="Controller" method="combatant_added"]
 [connection signal="combatant_added" from="VisualCombat" to="CanvasLayer/UI" method="add_combatant_status"]
 [connection signal="combatant_died" from="VisualCombat" to="Controller" method="combatant_died"]
