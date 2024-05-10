@@ -10,6 +10,8 @@ signal turn_ended()
 const TQIcon = preload("res://ui/tq_icon.tscn")
 const StatusIcon = preload("res://ui/status_icon.tscn")
 
+var in_motion = false
+
 func add_turn_queue_icon(combatant: Dictionary):
 	var new_icon = TQIcon.instantiate()
 	$TurnQueue/Queue.add_child(new_icon)
@@ -53,7 +55,8 @@ func show_combatant_status_main(comb: Dictionary):
 
 
 func _on_end_turn_button_pressed():
-	turn_ended.emit()
+	if in_motion == false:
+		turn_ended.emit()
 
 
 func update_information(info: String):
@@ -98,15 +101,17 @@ func update_combatants(combatants: Array):
 			var status = $Status.find_child(comb.name, false, false)
 			if status != null:
 				status.set_health(comb.hp, comb.max_hp)
-		var turn_queue_icon = $TurnQueue/Queue.get_node(comb.name)
-		if turn_queue_icon != null:
-			turn_queue_icon.set_hp(comb.hp)
-			turn_queue_icon.set_side(comb.side)
-			turn_queue_icon.set_turn_taken(comb.turn_taken)
+		if comb.alive == true:
+			var turn_queue_icon = $TurnQueue/Queue.get_node(comb.name)
+			if turn_queue_icon != null:
+				turn_queue_icon.set_hp(comb.hp)
+				turn_queue_icon.set_side(comb.side)
+				turn_queue_icon.set_turn_taken(comb.turn_taken)
 
 # Set the movement text
 func set_movement(movement):
 	$Actions/Movement.text = str(movement)
+	in_motion = true
 
 # Hide the target selection message
 func _target_selection_finished():
@@ -115,3 +120,7 @@ func _target_selection_finished():
 # Show the target selection message
 func _target_selection_started():
 	$Actions/SelectTargetMessage.visible = true
+
+
+func _on_controller_finished_move():
+	in_motion = false
