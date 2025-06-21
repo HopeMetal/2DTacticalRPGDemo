@@ -63,6 +63,9 @@ func _ready():
 	controller.set_controlled_combatant(combatants[turn_queue[0]])
 	game_ui.set_skill_list(combatants[turn_queue[0]].skill_list)
 	combat_started.emit(combatants[current_combatant])
+	var first_unit: Dictionary = combatants[turn_queue[0]]
+	if first_unit.side != Group.PLAYERS:
+		ai_process(first_unit)
 
 
 func create_combatant(definition: CombatantDefinition, override_name = ""):
