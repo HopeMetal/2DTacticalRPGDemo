@@ -3,6 +3,7 @@ class_name CController
 ##Class for controlling sprites representing combatants on the tile map
 
 signal movement_changed(movement: int)
+signal started_move
 signal finished_move
 signal target_selection_started()
 signal target_selection_finished()
@@ -39,6 +40,7 @@ func _unhandled_input(event):
 					if comb != null and comb.alive:
 						target_selected(comb)
 				elif _arrived == true:
+					started_move.emit()
 					move_player()
 	
 	if event is InputEventMouseMotion:

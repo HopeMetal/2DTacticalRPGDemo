@@ -30,7 +30,9 @@ combat = NodePath("../../VisualCombat")
 controller = NodePath("../../Controller")
 metadata/_edit_use_anchors_ = true
 
+[connection signal="finished_move" from="Controller" to="CanvasLayer/UI" method="_on_controller_finished_move"]
 [connection signal="movement_changed" from="Controller" to="CanvasLayer/UI" method="set_movement"]
+[connection signal="started_move" from="Controller" to="CanvasLayer/UI" method="_on_controller_started_move"]
 [connection signal="target_selection_finished" from="Controller" to="CanvasLayer/UI" method="_target_selection_finished"]
 [connection signal="target_selection_started" from="Controller" to="CanvasLayer/UI" method="_target_selection_started"]
 [connection signal="combatant_added" from="VisualCombat" to="Controller" method="combatant_added"]

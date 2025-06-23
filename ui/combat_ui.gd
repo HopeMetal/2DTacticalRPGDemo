@@ -111,7 +111,6 @@ func update_combatants(combatants: Array):
 # Set the movement text
 func set_movement(movement):
 	$Actions/Movement.text = str(movement)
-	in_motion = true
 
 # Hide the target selection message
 func _target_selection_finished():
@@ -124,3 +123,7 @@ func _target_selection_started():
 
 func _on_controller_finished_move():
 	in_motion = false
+
+
+func _on_controller_started_move() -> void:
+	in_motion = true
