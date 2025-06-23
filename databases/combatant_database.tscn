@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://sgve77vtu623"]
 
-[ext_resource type="Script" path="res://databases/combatant_database.gd" id="1_5ebs0"]
-[ext_resource type="Script" path="res://combat/resources/CombatantDefinition.gd" id="2_rggep"]
+[ext_resource type="Script" uid="uid://c6d5i1s21fl0y" path="res://databases/combatant_database.gd" id="1_5ebs0"]
+[ext_resource type="Script" uid="uid://dntmhg7e28wpm" path="res://combat/resources/CombatantDefinition.gd" id="2_rggep"]
 [ext_resource type="Texture2D" uid="uid://mha8vbqb2djl" path="res://imagese/chars.png" id="3_vw1bw"]
 [ext_resource type="Texture2D" uid="uid://tho1dgha8gr1" path="res://imagese/monsters.png" id="4_72lse"]
 

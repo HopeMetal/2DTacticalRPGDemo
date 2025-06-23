@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://ddgx1hll377nx"]
 
-[ext_resource type="Script" path="res://ui/combat_ui.gd" id="1_cy8ae"]
-[ext_resource type="Shader" path="res://ui/GrayscaleIcon.gdshader" id="3_pilcd"]
+[ext_resource type="Script" uid="uid://cd1l2ykyue8xl" path="res://ui/combat_ui.gd" id="1_cy8ae"]
+[ext_resource type="Shader" uid="uid://ncvnwtnd0as" path="res://ui/GrayscaleIcon.gdshader" id="3_pilcd"]
 [ext_resource type="PackedScene" uid="uid://d0hcis8q3seqg" path="res://ui/status_icon.tscn" id="4_mn0g0"]
 [ext_resource type="Texture2D" uid="uid://b5bhqfskef7lb" path="res://imagese/icon/melee_attack.png" id="6_puss2"]
 [ext_resource type="Texture2D" uid="uid://bonh4ibo7lwda" path="res://imagese/icon/ranged_attack.png" id="7_i51fj"]
@@ -14,8 +14,8 @@ shader_parameter/color_factor = 0.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kj4jo"]
 bg_color = Color(0, 0, 0, 0.52549)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdlup"]
-bg_color = Color(0.360784, 0.360784, 0.360784, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_um0nj"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
 shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dsm8"]
@@ -27,8 +27,8 @@ bg_color = Color(0.243137, 0.243137, 0.243137, 1)
 shadow_size = 10
 shadow_offset = Vector2(0, -5)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_um0nj"]
-bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdlup"]
+bg_color = Color(0.360784, 0.360784, 0.360784, 1)
 shadow_size = 10
 
 [node name="UI" type="Control"]
@@ -197,10 +197,10 @@ offset_right = 532.0
 offset_bottom = 109.0
 focus_mode = 0
 theme_override_colors/font_disabled_color = Color(0.364706, 0.364706, 0.364706, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_pdlup")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_um0nj")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3dsm8")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_do5rw")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_um0nj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pdlup")
 text = "End Turn"
 
 [node name="Information" type="PanelContainer" parent="Actions"]

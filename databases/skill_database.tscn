@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://csoe2cma4kbg6"]
 
-[ext_resource type="Script" path="res://databases/skill_database.gd" id="1_bnr7k"]
-[ext_resource type="Script" path="res://combat/resources/SkillDefinition.gd" id="2_twktv"]
+[ext_resource type="Script" uid="uid://02ya5dpu22ob" path="res://databases/skill_database.gd" id="1_bnr7k"]
+[ext_resource type="Script" uid="uid://dxpenr2xgmkbx" path="res://combat/resources/SkillDefinition.gd" id="2_twktv"]
 [ext_resource type="Texture2D" uid="uid://b5bhqfskef7lb" path="res://imagese/icon/melee_attack.png" id="2_wuynl"]
 [ext_resource type="Texture2D" uid="uid://bonh4ibo7lwda" path="res://imagese/icon/ranged_attack.png" id="4_gjsae"]
 [ext_resource type="Texture2D" uid="uid://wxkh5qyiy8c1" path="res://imagese/icon/basic_magic.png" id="5_vgs37"]

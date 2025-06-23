@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dh45d8lpup6dp"]
 
 [ext_resource type="PackedScene" uid="uid://ww05yde5nb2t" path="res://scenes/terrain.tscn" id="1_kphof"]
-[ext_resource type="Script" path="res://scenes/Camera2D2.gd" id="2_mtcfj"]
-[ext_resource type="Script" path="res://control/CController.gd" id="3_x4dax"]
-[ext_resource type="Script" path="res://combat/Combat.gd" id="4_m66ig"]
+[ext_resource type="Script" uid="uid://bfucywdm7g2ia" path="res://scenes/Camera2D2.gd" id="2_mtcfj"]
+[ext_resource type="Script" uid="uid://dw61ab8vkor8m" path="res://control/CController.gd" id="3_x4dax"]
+[ext_resource type="Script" uid="uid://bxon2atedp3fs" path="res://combat/Combat.gd" id="4_m66ig"]
 [ext_resource type="PackedScene" uid="uid://ddgx1hll377nx" path="res://ui/ui.tscn" id="5_67d2u"]
 
 [node name="Game" type="Node"]

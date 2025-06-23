@@ -1,5 +1,5 @@
 shader_type canvas_item;
-uniform float color_factor : hint_range(0.0, 1.0, 1.0); 
+uniform float color_factor : hint_range(0.0, 1.0, 1.0);
 
 void fragment() {
 	vec4 sample = texture(TEXTURE, UV);
